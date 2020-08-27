@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Weigm</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="input">
+                <form action="">
+                    <label for=""></label>
+                    <input type="text" placeholder="kilogram" class="type">
+                </form>
+            </div>
+            <div class="column-five">
+
+                <ul class="col-six">
+
+                    <li class="one"> </li>
+                    <li class="two"></li>
+                    <li class="three"></li>
+                    <li class="four"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+
+    function renderValues(values) {
+        const classNames = ['one', 'two', 'three', 'four'];
+        classNames.map(obj => {
+            document.querySelector(`.${obj}`).innerHTML = values[obj];
+        })
+    }
+
+    document.querySelector('.type').addEventListener("input", e => {
+        let li = e.target.value;
+        console.log(li);
+        const values = {
+            one: `${(li / 1000).toFixed(2)} in gram`,
+            two: `${(li / 12).toFixed(2)} in pounds`,
+            three: `${(li / 180).toFixed(2)} in milligram`,
+            four: `${(li / 10).toFixed(2)} in ounces`
+        }
+        renderValues(values);
+
+        localStorage.setItem('items', JSON.stringify(values));
+
+    });
+    const values = JSON.parse(localStorage.getItem('items'));
+
+    if (values) {
+
+        renderValues(values);
+    }
+
+</script>
+
+</html>
